@@ -1,7 +1,0 @@
-services:
-  cloudflared:
-    container_name: cloudflare
-    image: cloudflare/cloudflared:latest
-    command: tunnel --no-autoupdate run
-    env_file: ../../env/cloudflared/.env
-    restart: always
