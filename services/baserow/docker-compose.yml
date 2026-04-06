@@ -1,0 +1,27 @@
+services:
+  baserow:
+    container_name: baserow
+    image: baserow/baserow:2.1.6
+    env_file:
+      - ../../env/shared/.env
+      - ../../env/baserow/.env
+    expose:
+      - 80
+    volumes:
+      - baserow_data:/baserow/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+        restart: true
+      redis:
+        condition: service_healthy
+        restart: true
+
+  cloudflare_baserow:
+    container_name: cloudflare-baserow
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run
+    env_file: ../../env/baserow/.env
+    restart: always
+volumes:
+  baserow_data:
