@@ -1,0 +1,21 @@
+---
+networks:
+  nocobase:
+    driver: bridge
+services:
+  nocobase:
+    container_name: bmmit-nocobase
+    image: nocobase/nocobase:latest-full
+    restart: always
+    env_file:
+      - ../../env/shared/.env
+      - ../../env/nocobase/.env
+    volumes: [../../data/nocobase:/app/nocobase/storage]
+    expose:
+      - 80
+  cloudflare_nocobase:
+    container_name: bmmit-cloudflare-nocobase
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run
+    env_file: ../../env/nocobase/.env
+    restart: always

@@ -1,6 +1,6 @@
 services:
   baserow:
-    container_name: baserow
+    container_name: bmmit-baserow
     image: baserow/baserow:2.1.6
     env_file:
       - ../../env/shared/.env
@@ -8,7 +8,7 @@ services:
     expose:
       - 80
     volumes:
-      - baserow_data:/baserow/data
+      - ../../data/baserow:/baserow/data
     depends_on:
       postgres:
         condition: service_healthy
@@ -18,7 +18,7 @@ services:
         restart: true
 
   cloudflare_baserow:
-    container_name: cloudflare-baserow
+    container_name: bmmit-cloudflare-baserow
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run
     env_file: ../../env/baserow/.env

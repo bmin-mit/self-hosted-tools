@@ -3,16 +3,16 @@ include:
   - ../storage/docker-compose.yml
 services:
   outline:
-    container_name: outline
+    container_name: bmmit-outline
     image: docker.getoutline.com/outlinewiki/outline:latest
     env_file: 
       - ../../env/shared/.env
       - ../../env/outline/.env
     expose: ['3000']
-    volumes: [storage-data:/var/lib/outline/data]
+    volumes: [../../data/outline:/var/lib/outline/data]
     depends_on: [postgres, redis]
-  cloudflared_outline:
-    container_name: cloudflare-outline
+  cloudflare_outline:
+    container_name: bmmit-cloudflare-outline
     image: cloudflare/cloudflared:latest
     command: tunnel --no-autoupdate run
     env_file: ../../env/outline/.env
