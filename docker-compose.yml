@@ -1,4 +1,2 @@
 include:
   - ./services/outline/docker-compose.yml
-  - ./services/baserow/docker-compose.yml
-  - ./services/nocobase/docker-compose.yml
